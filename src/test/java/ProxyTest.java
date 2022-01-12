@@ -83,6 +83,13 @@ public class ProxyTest {
     }
 
     @Test
+    void testHttpclient2195BadHostNoConnectionCloseZeroLength() throws Exception {
+        errorBody.set("");
+        errorSendConnectionClose.set(false);
+        doRequest(new HttpGet("https://not-a-valid-host/get"));
+    }
+
+    @Test
     void testHttpclient2195BadHostLargeBody() throws Exception {
         errorBody.set(StringUtils.repeat("very long string", 1000));
         doRequest(new HttpGet("https://not-a-valid-host/get"));
